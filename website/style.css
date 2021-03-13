@@ -1,0 +1,9 @@
+body {
+    background-color: teal;
+}
+
+#interaction_container {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+}
