@@ -1,9 +1,25 @@
 const http = require('http');
-const port = 8000;
+const port = 6600;
+
 const express = require("express");
 const app = express();
-const cors = require("cors");
 
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+const cors = require("cors");
+app.use(cors());
+
+app.use(express.static('website'));
+
+app.use(function(req, res) {
+    res.setHeader("Content-Type", "text/plain");
+    res.write('you posted:\n')
+    res.end(JSON.stringify)
+})
 app.get("/", (req, res) => {
     res.send("Hello World");
 });
