@@ -23,3 +23,7 @@ for (let i = 0; i < childDivs.length; i++) {
 main.appendChild(entry);
 
 console.log(entry);
+
+//api key for the weather
+const apiKey = "&appid=649b1be56004028c877a56b4fb684127";
+const baseURL = "api.openweathermap.org/data/2.5/weather?zip=";
