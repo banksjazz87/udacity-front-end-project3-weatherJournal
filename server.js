@@ -1,4 +1,3 @@
-const http = require('http');
 const port = 6600;
 
 const express = require("express");
@@ -30,3 +29,9 @@ function listening() {
     console.log("server running");
     console.log(`running on localhost: ${port}`);
 }
+
+const inputData = [];
+
+app.get('/website', function(req, res) {
+    res.send('Hello World');
+})
