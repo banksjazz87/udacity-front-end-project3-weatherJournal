@@ -16,12 +16,9 @@ app.use(express.static('website'));
 
 app.use(function(req, res) {
     res.setHeader("Content-Type", "text/plain");
-    res.write('you posted:\n')
+    //res.write('you posted \n')
     res.end(JSON.stringify)
 })
-app.get("/", (req, res) => {
-    res.send("Hello World");
-});
 
 const server = app.listen(port, listening);
 
@@ -32,6 +29,6 @@ function listening() {
 
 const inputData = [];
 
-app.get('/website', function(req, res) {
-    res.send('Hello World');
-})
+app.get(baseURL + zipCode.value + country + apiKey, (data) => {
+    console.log(data);
+});
