@@ -25,10 +25,11 @@ main.appendChild(entry);
 console.log(entry);
 
 //api key for the weather
-const baseURL = "api.openweathermap.org/data/2.5/weather?zip=";
+const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const apiKey = "&appid=649b1be56004028c877a56b4fb684127";
 const zipCode = document.getElementById("zip");
-let country = ",us";
+const country = ",us";
+const unit = "&units=imperial";
 
 
 
@@ -37,17 +38,17 @@ document.getElementById("generate").addEventListener('click', newLocation);
 
 
 function newLocation(e) {
-    getWeather(baseURL, zipCode.value, country, apiKey)
+    getWeather(baseURL, zipCode.value, country, apiKey, unit)
         //console.log(baseURL + zipCode.value + country + apiKey);
 
 }
 
-const getWeather = async(baseURL, loc, key) => {
-    const res = await fetch(baseURL + loc + key)
+const getWeather = async(baseURL, loc, nation, key, farenheit) => {
+    const res = await fetch(baseURL + loc + nation + key + farenheit)
     try {
         const data = await res.json();
-        console.log(data)
-        return data
+        console.log(data);
+        //return data
     } catch (error) {
         console.log("error", error);
     }
