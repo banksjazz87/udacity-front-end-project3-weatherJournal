@@ -65,11 +65,10 @@ function newLocation(e) {
     getWeather(baseURL, zipCode.value, country, apiKey, unit)
     currentDate()
     inputText()
-        /*.then(function(data){}
-             console.log(data);
-             postData('/newZip', { date: day, temp: currentTemp, content: userText })
-         })*/
-
+        .then(function(data) {
+            console.log(data);
+            postData('/newZip', { date: day, temp: data.main.temp, content: userText })
+        })
 }
 
 const getWeather = async(baseURL, loc, nation, key, farenheit) => {
@@ -102,5 +101,3 @@ const postData = async(url = " ", data = {}) => {
         console.log('error', error);
     }
 }
-
-console.log(day);

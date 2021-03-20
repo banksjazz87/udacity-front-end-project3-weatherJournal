@@ -27,15 +27,20 @@ function listening() {
     console.log(`running on localhost: ${port}`);
 }
 
-let projectData = {
-    date: "",
-    temp: "",
-    content: "",
+let projectData = {};
+let allData = [];
 
-};
+//This is the route made for the post
+app.post('/newZip', newContent);
 
-app.get('/', function(req, res) {
-    console.log('hello world');
-})
+function newContent(req, res) {
+    projectData = {
+        date: req.body.date,
+        temp: req.body.temp,
+        content: req.body.content
+    }
 
-//console.log(baseURL);
+    allData.push(projectData)
+    res.send(allData)
+    console.log(allData)
+}
