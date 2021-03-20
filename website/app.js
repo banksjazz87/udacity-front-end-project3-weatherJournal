@@ -39,7 +39,10 @@ document.getElementById("generate").addEventListener('click', newLocation);
 
 function newLocation(e) {
     getWeather(baseURL, zipCode.value, country, apiKey, unit)
-        //console.log(baseURL + zipCode.value + country + apiKey);
+        .then(function(data) {
+            console.log(data);
+            postData('/newZip', { date: data. })
+        })
 
 }
 
@@ -51,5 +54,23 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
         //return data
     } catch (error) {
         console.log("error", error);
+    }
+}
+
+const postData = async(url = " ", data = {}) => {
+    const response = await fetch(url, {
+        method: 'Post',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    try {
+        const newData = await response.json();
+        console.log(newData);
+        return newData;
+    } catch (error) {
+        console.log('error', error);
     }
 }

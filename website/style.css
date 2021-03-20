@@ -3,6 +3,7 @@ body {
 }
 
 #interaction_container {
+    margin-top: 45vh;
     display: flex;
     flex-direction: column;
     width: 25vw;

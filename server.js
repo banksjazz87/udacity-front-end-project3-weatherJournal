@@ -27,8 +27,15 @@ function listening() {
     console.log(`running on localhost: ${port}`);
 }
 
-const projectData = {};
+const projectData = {
+    date: "",
+    temp: "",
+    content: "",
 
-app.get(baseURL + zipCode.value + country + apiKey, (data) => {
-    console.log(data);
-});
+};
+
+app.get('/', function(req, res) {
+    console.log('hello world');
+})
+
+console.log(baseURL);
