@@ -27,7 +27,7 @@ function listening() {
     console.log(`running on localhost: ${port}`);
 }
 
-const projectData = {
+let projectData = {
     date: "",
     temp: "",
     content: "",
@@ -38,4 +38,4 @@ app.get('/', function(req, res) {
     console.log('hello world');
 })
 
-console.log(baseURL);
+//console.log(baseURL);

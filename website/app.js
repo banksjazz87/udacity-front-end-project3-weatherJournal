@@ -31,6 +31,19 @@ const zipCode = document.getElementById("zip");
 const country = ",us";
 const unit = "&units=imperial";
 
+//functions to the get the current date
+let day = '';
+//const year = date.getFullYear();
+const currentDate = () => {
+    const date = new Date();
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    day = (months[date.getMonth()] + " " + date.getDate() + "," + " " + date.getFullYear());
+    return day;
+}
+
+
 
 
 document.getElementById("generate").addEventListener('click', newLocation);
@@ -39,10 +52,12 @@ document.getElementById("generate").addEventListener('click', newLocation);
 
 function newLocation(e) {
     getWeather(baseURL, zipCode.value, country, apiKey, unit)
-        .then(function(data) {
-            console.log(data);
-            postData('/newZip', { date: data. })
-        })
+    currentDate()
+    console.log(day);
+    /*.then(function(data) {
+         console.log(data);
+         postData('/newZip', { date: data. })
+     })*/
 
 }
 
@@ -74,3 +89,5 @@ const postData = async(url = " ", data = {}) => {
         console.log('error', error);
     }
 }
+
+console.log(day);
