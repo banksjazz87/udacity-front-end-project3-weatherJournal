@@ -54,25 +54,24 @@ const inputText = () => {
     console.log(userText);
 }
 
-
-
-
+//Click event to return the information from the weather api.
 document.getElementById("generate").addEventListener('click', newLocation);
 
 
 
 function newLocation(e) {
     getWeather(baseURL, zipCode.value, country, apiKey, unit)
-    currentDate()
-    inputText()
+        //currentDate()
+        //inputText()
         .then(function(data) {
-            console.log(data);
-            postData('/newZip', { date: day, temp: data.main.temp, content: userText })
+            //console.log(data);
+            postData('/newZip', { date: day, temp: data, content: userText })
         })
 }
 
 const getWeather = async(baseURL, loc, nation, key, farenheit) => {
     const res = await fetch(baseURL + loc + nation + key + farenheit)
+
     try {
         const data = await res.json();
         console.log(data);
@@ -86,13 +85,14 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
 
 const postData = async(url = " ", data = {}) => {
     const response = await fetch(url, {
-        method: 'Post',
+        method: 'POST',
         credentials: 'same-origin',
-        headers: {
+        /*headers: {
             'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        },*/
+        //body: JSON.stringify(data),
     });
+
     try {
         const newData = await response.json();
         console.log(newData);

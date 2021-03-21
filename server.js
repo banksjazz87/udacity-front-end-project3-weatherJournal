@@ -31,9 +31,10 @@ let projectData = {};
 let allData = [];
 
 //This is the route made for the post
-app.post('/newZip', newContent);
+app.post('/newZip', newZip);
 
-function newContent(req, res) {
+function newZip(req, res) {
+    console.log(req.body)
     projectData = {
         date: req.body.date,
         temp: req.body.temp,
