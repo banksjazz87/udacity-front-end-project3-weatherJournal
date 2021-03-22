@@ -58,14 +58,12 @@ const inputText = () => {
 document.getElementById("generate").addEventListener('click', newLocation);
 
 
-
 function newLocation(e) {
     getWeather(baseURL, zipCode.value, country, apiKey, unit)
-        //currentDate()
-        //inputText()
+        .then(currentDate())
+        .then(inputText())
         .then(function(data) {
-            //console.log(data);
-            postData('/newZip', { date: day, temp: data, content: userText })
+            postData('/newZip', { date: day, temp: data.main.temp, content: userText })
         })
 }
 
@@ -75,8 +73,9 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
     try {
         const data = await res.json();
         console.log(data);
-        currentTemp = data.main.temp;
-        console.log(currentTemp);
+        return data;
+        /*currentTemp = data.main.temp;
+        console.log(currentTemp);*/
         //return data
     } catch (error) {
         console.log("error", error);
@@ -84,18 +83,18 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
 }
 
 const postData = async(url = " ", data = {}) => {
-    const response = await fetch(url, {
+    let response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
-        /*headers: {
+        headers: {
             'Content-Type': 'application/json',
-        },*/
-        //body: JSON.stringify(data),
+        },
+        body: JSON.stringify(data),
     });
 
     try {
-        const newData = await response.json();
-        console.log(newData);
+        let newData = await response.json();
+        console.log(newData)
         return newData;
     } catch (error) {
         console.log('error', error);
