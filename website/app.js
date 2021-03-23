@@ -63,7 +63,8 @@ function newLocation(e) {
         .then(currentDate())
         .then(inputText())
         .then(function(data) {
-            postData('/newZip', { date: day, temp: data.main.temp, content: userText })
+            //postedData("/newZip", { temp: data.main.temp });
+            postData("/newZip", { date: day, temp: data.main.temp, content: userText });
         })
 }
 
@@ -74,27 +75,28 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
         const data = await res.json();
         console.log(data);
         return data;
-        /*currentTemp = data.main.temp;
-        console.log(currentTemp);*/
-        //return data
     } catch (error) {
         console.log("error", error);
     }
 }
 
-const postData = async(url = " ", data = {}) => {
-    let response = await fetch(url, {
+const postData = async(url = "", data = {}) => {
+    const response = await fetch(url, {
         method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-    });
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
+    })
 
     try {
-        let newData = await response.json();
-        console.log(newData)
+        const newData = await response.json();
+        console.log(newData);
         return newData;
     } catch (error) {
         console.log('error', error);

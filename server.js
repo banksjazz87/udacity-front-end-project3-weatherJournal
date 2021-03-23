@@ -23,21 +23,17 @@ app.use(function(req, res) {
 const server = app.listen(port, listening);
 
 function listening() {
-    console.log("server running");
+    console.log("server is running");
     console.log(`running on localhost: ${port}`);
 }
 
-let projectData = {
-    date: "",
-    temp: "",
-    content: ""
-};
+let projectData = {};
 let allData = [];
 
 //This is the route made for the post
-app.post('/newZip', newContent);
+app.post("/newZip", newZip);
 
-function newContent(req, res) {
+function newZip(req, res) {
     projectData = {
         date: req.body.date,
         temp: req.body.temp,
@@ -46,8 +42,4 @@ function newContent(req, res) {
 
     allData.push(projectData)
     res.send(allData)
-        /*console.log(allData)
-        console.log(projectData)*/
 }
-
-console.log(allData);
