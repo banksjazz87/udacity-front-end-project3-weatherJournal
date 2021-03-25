@@ -3,6 +3,8 @@ const port = 6600;
 const express = require("express");
 const app = express();
 
+// bodyParser is no longer needed with this version of express.js
+
 //const bodyParser = require("body-parser");
 
 app.use(express.urlencoded({ extended: false }));
@@ -14,11 +16,6 @@ app.use(cors());
 
 app.use(express.static('website'));
 
-/*app.use(function(req, res) {
-    res.setHeader("Content-Type", "text/plain")
-    res.write(`you posted:\n`)
-    res.end(JSON.stringify(req.body, null, 2))
-})*/
 
 const server = app.listen(port, listening);
 
@@ -37,7 +34,7 @@ let allData = [];
 app.get('/https://api.openweathermap.org/data/2.5/weather?zi…d=649b1be56004028c877a56b4fb684127&units=imperial', currentData);
 
 function currentData() {
-    res.send(projecData)
+    res.send(projectData)
     console.log(projectData);
 }
 
@@ -47,14 +44,22 @@ function currentData() {
 app.post("/newZip", newZip);
 
 function newZip(req, res) {
-    console.log(req.body);
-    /*projectData = {
-         date: req.body.date,
-         temp: req.body.temp,
-         content: req.body.content
-     }
+    projectData = {
+        date: req.body.date,
+        temp: req.body.temp,
+        content: req.body.content
+    }
 
-     allData.push(projectData)
-     res.send(allData);
-    //console.log('cat');*/
+    allData.push(projectData);
+    res.send(projectData)
+        //res.send(allData);
+        //console.log(allData);
+}
+
+//This is the route used to retrieve all of the data that has been submitted.
+
+app.get("/all", sendAll);
+
+function sendAll(req, res) {
+    res.send(allData);
 }

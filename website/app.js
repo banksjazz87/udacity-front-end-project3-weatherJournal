@@ -1,3 +1,5 @@
+//const { response } = require("express");
+
 /**
  * @description this code is for creating the child div elements for the parent div with the id "entryHolder".
  * @returns three new divs with new id attributes.
@@ -65,6 +67,7 @@ function newLocation(e) {
         .then(function(data) {
             //postedData("/newZip", { temp: data.main.temp });
             postData("/newZip", { date: day, temp: data.main.temp, content: userText });
+            takeAll();
         })
 }
 
@@ -97,8 +100,21 @@ const postData = async(url = "", data = {}) => {
     try {
         const newData = await response.json();
         console.log(newData);
-        return newData;
+        //return newData;
+        //takeAll("/all");
     } catch (error) {
         console.log('error', error);
     }
+}
+
+const takeAll = async() => {
+    const allUserData = await fetch("/all");
+
+    try {
+        const newData = await allUserData.json();
+        console.log(newData[0]);
+    } catch (error) {
+        console.log("error", error);
+    }
+
 }
