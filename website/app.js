@@ -65,10 +65,9 @@ function newLocation(e) {
         .then(currentDate())
         .then(inputText())
         .then(function(data) {
-            //postedData("/newZip", { temp: data.main.temp });
             postData("/newZip", { date: day, temp: data.main.temp, content: userText });
-            takeAll();
         })
+        .then(takeAll)
 }
 
 const getWeather = async(baseURL, loc, nation, key, farenheit) => {
@@ -113,6 +112,9 @@ const takeAll = async() => {
     try {
         const newData = await allUserData.json();
         console.log(newData[0]);
+        document.getElementById('date').innerText = newData[0].date;
+        document.getElementById('temp').innerText = newData[0].temp + "°F";
+        document.getElementById('content').innerText = newData[0].content;
     } catch (error) {
         console.log("error", error);
     }

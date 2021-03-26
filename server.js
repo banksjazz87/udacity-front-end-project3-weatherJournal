@@ -24,21 +24,8 @@ function listening() {
     console.log(`running on localhost: ${port}`);
 }
 
-let projectData = {
-    date: "poop",
-    temp: "fart",
-    content: "hello"
-};
+let projectData = {};
 let allData = [];
-//This is the data collected from the original API call
-app.get('/https://api.openweathermap.org/data/2.5/weather?zi…d=649b1be56004028c877a56b4fb684127&units=imperial', currentData);
-
-function currentData() {
-    res.send(projectData)
-    console.log(projectData);
-}
-
-
 
 //This is the route made for the post
 app.post("/newZip", newZip);
@@ -50,10 +37,9 @@ function newZip(req, res) {
         content: req.body.content
     }
 
-    allData.push(projectData);
+    allData.unshift(projectData);
     res.send(projectData)
-        //res.send(allData);
-        //console.log(allData);
+    console.log(allData);
 }
 
 //This is the route used to retrieve all of the data that has been submitted.
