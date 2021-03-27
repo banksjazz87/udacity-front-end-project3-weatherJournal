@@ -167,7 +167,8 @@ const upperCase = (string) => {
     let newStr = [];
     let arrayOf = string.split(" ");
     for (var i = 0; i < arrayOf.length; i++) {
-
+        newStr.push(arrayOf[i][0].toString().toUpperCase());
     }
-    console.log(arrayOf.length);
+
+    console.log(newStr);
 }
