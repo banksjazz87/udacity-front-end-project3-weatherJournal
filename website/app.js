@@ -1,5 +1,3 @@
-//const { response } = require("express");
-
 /**
  * @description this code is for creating the child div elements for the parent div with the id "entryHolder".
  * @returns three new divs with new id attributes.
@@ -18,15 +16,12 @@ for (let i = 0; i < childDivs.length; i++) {
     let newEntryAtt = document.createAttribute('id');
     newEntryAtt.value = childDivs[i];
     newDiv.setAttributeNode(newEntryAtt);
-    newDiv.textContent = childDivs[i];
     entry.appendChild(newDiv);
 }
 
 main.appendChild(entry);
 
-console.log(entry);
-
-//api key for the weather
+//different constants that are going to make up the content of the api request.
 const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const apiKey = "&appid=649b1be56004028c877a56b4fb684127";
 const zipCode = document.getElementById("zip");
@@ -36,52 +31,83 @@ const unit = "&units=imperial";
 // Three values that will be displayed when the user clicks the 'curent weather' button.
 let day = '';
 let currentTemp = '';
+let city = '';
+let sky = '';
 let userText = '';
 
-//function to the get the current date
+/**
+ * @description this function is used to create the current date.
+ * @returns current date.
+ */
 const currentDate = () => {
     const date = new Date();
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     day = (months[date.getMonth()] + " " + date.getDate() + "," + " " + date.getFullYear());
-    //return day;
-    console.log(day);
+    return day;
 }
 
-//function to get the user's text input
+/**
+ * @description this function will be called, in order to extract the user's input from the text area.
+ * @returns the value of the text area.
+ */
 const inputText = () => {
     const inputField = document.querySelector('textarea');
     userText = inputField.value;
     console.log(userText);
 }
 
-//Click event to return the information from the weather api.
+/**
+ * @description this is adding an event listener to the button.
+ * @returns the date, input text, and current temperature.
+ */
 document.getElementById("generate").addEventListener('click', newLocation);
-
 
 function newLocation(e) {
     getWeather(baseURL, zipCode.value, country, apiKey, unit)
         .then(currentDate())
         .then(inputText())
         .then(function(data) {
-            postData("/newZip", { date: day, temp: data.main.temp, content: userText });
+            postData("/newZip", { date: day, temp: data.main.temp, city: data.name, sky: data.weather[0].description, content: userText });
         })
         .then(takeAll)
+        .then(clearPrevious())
 }
 
+/**
+ * 
+ * @param {string} baseURL 
+ * @param {string} loc 
+ * @param {string} nation 
+ * @param {string} key 
+ * @param {string} farenheit 
+ * @description this function will return all of the weather data from openweathermap.com, as long as the user has put in a valid zip code.
+ * @returns {json} all of the weather data from the api, openweathermap.com, if successful, otherwise there will be an alert.
+ */
 const getWeather = async(baseURL, loc, nation, key, farenheit) => {
     const res = await fetch(baseURL + loc + nation + key + farenheit)
 
     try {
         const data = await res.json();
-        console.log(data);
-        return data;
+        if (data.cod !== 200) {
+            alert("Please insert a valid zip code.")
+        } else {
+            console.log(data);
+            console.log(data.main);
+            return data;
+        }
     } catch (error) {
         console.log("error", error);
     }
 }
 
+/**
+ * 
+ * @param {string} url 
+ * @param {object} data 
+ * @description this is creating a post request to the server.
+ */
 const postData = async(url = "", data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
@@ -98,25 +124,40 @@ const postData = async(url = "", data = {}) => {
 
     try {
         const newData = await response.json();
-        console.log(newData);
-        //return newData;
-        //takeAll("/all");
     } catch (error) {
         console.log('error', error);
     }
 }
 
+/**
+ * @description this code is going to take the most recently submitted data from the array that is storing all of the user data in the server "allData".
+ * @returns an updated ui displaying the most recent input.
+ */
 const takeAll = async() => {
     const allUserData = await fetch("/all");
 
     try {
         const newData = await allUserData.json();
+
         console.log(newData[0]);
+
         document.getElementById('date').innerText = newData[0].date;
-        document.getElementById('temp').innerText = newData[0].temp + "°F";
+
+        document.getElementById('temp').innerText = newData[0].city + "\n" + "Current Temperature" + "\n" + newData[0].temp + "°F" + "\n" + newData[0].sky;
+
         document.getElementById('content').innerText = newData[0].content;
+
     } catch (error) {
         console.log("error", error);
     }
 
+}
+
+/**
+ * @description this just clears all of the users previous input from the input fields.
+ * @returns clear input forms.
+ */
+const clearPrevious = () => {
+    document.getElementById('zip').value = "";
+    document.getElementById('feelings').value = "";
 }

@@ -34,6 +34,8 @@ function newZip(req, res) {
     projectData = {
         date: req.body.date,
         temp: req.body.temp,
+        city: req.body.city,
+        sky: req.body.sky,
         content: req.body.content
     }
 
