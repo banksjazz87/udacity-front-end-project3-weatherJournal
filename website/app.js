@@ -9,7 +9,7 @@ const entryAtt = document.createAttribute('id');
 entryAtt.value = 'entryHolder';
 entry.setAttributeNode(entryAtt);
 
-const childDivs = ["date", "temp", "content"];
+const childDivs = ["date", "city", "temp_text", "temp", "weather", "content"];
 
 for (let i = 0; i < childDivs.length; i++) {
     let newDiv = document.createElement('div');
@@ -32,7 +32,7 @@ const unit = "&units=imperial";
 let day = '';
 let currentTemp = '';
 let city = '';
-let sky = '';
+let weather = '';
 let userText = '';
 
 /**
@@ -55,7 +55,6 @@ const currentDate = () => {
 const inputText = () => {
     const inputField = document.querySelector('textarea');
     userText = inputField.value;
-    console.log(userText);
 }
 
 /**
@@ -69,7 +68,7 @@ function newLocation(e) {
         .then(currentDate())
         .then(inputText())
         .then(function(data) {
-            postData("/newZip", { date: day, temp: data.main.temp, city: data.name, sky: data.weather[0].description, content: userText });
+            postData("/newZip", { date: day, temp: data.main.temp, city: data.name, weather: data.weather[0].description, content: userText });
         })
         .then(takeAll)
         .then(clearPrevious())
@@ -93,8 +92,6 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
         if (data.cod !== 200) {
             alert("Please insert a valid zip code.")
         } else {
-            console.log(data);
-            console.log(data.main);
             return data;
         }
     } catch (error) {
@@ -139,18 +136,21 @@ const takeAll = async() => {
     try {
         const newData = await allUserData.json();
 
-        console.log(newData[0]);
-
         document.getElementById('date').innerText = newData[0].date;
 
-        document.getElementById('temp').innerText = newData[0].city + "\n" + "Current Temperature" + "\n" + newData[0].temp + "°F" + "\n" + newData[0].sky;
+        document.getElementById('city').innerText = newData[0].city;
+
+        document.getElementById('temp_text').innerText = "Current Temperature";
+
+        document.getElementById('temp').innerText = newData[0].temp + "°F";
+
+        document.getElementById('weather').innerText = upperCase(newData[0].weather);
 
         document.getElementById('content').innerText = newData[0].content;
 
     } catch (error) {
         console.log("error", error);
     }
-
 }
 
 /**
@@ -160,4 +160,14 @@ const takeAll = async() => {
 const clearPrevious = () => {
     document.getElementById('zip').value = "";
     document.getElementById('feelings').value = "";
+}
+
+
+const upperCase = (string) => {
+    let newStr = [];
+    let arrayOf = string.split(" ");
+    for (var i = 0; i < arrayOf.length; i++) {
+
+    }
+    console.log(arrayOf.length);
 }
