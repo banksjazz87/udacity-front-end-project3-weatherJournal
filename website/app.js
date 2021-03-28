@@ -162,13 +162,22 @@ const clearPrevious = () => {
     document.getElementById('feelings').value = "";
 }
 
-
+/**
+ * 
+ * @param {*} string 
+ * @description this function takes a string and capitalizes the first letter of each word.
+ * @returns I used this for the current weather, it capitalizes the first letter of each word.
+ */
 const upperCase = (string) => {
     let newStr = [];
     let arrayOf = string.split(" ");
+
     for (var i = 0; i < arrayOf.length; i++) {
+
         let first = arrayOf[i][0].toString().toUpperCase().split('');
+
         let remainder = arrayOf[i].slice(1, arrayOf[i].length);
+
         newStr.push(first.concat(remainder).join(''));
     }
 
