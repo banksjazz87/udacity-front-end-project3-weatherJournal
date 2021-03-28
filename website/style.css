@@ -32,14 +32,16 @@ body {
 }
 
 #generate {
-    width: 8em;
+    width: 7em;
     /*border-width: .15em;*/
     padding: .15em;
     border-style: solid;
     border-color: black;
-    border-radius: 10%;
+    border-radius: 5%;
     box-shadow: 1px 2px gray;
     outline: none;
+    margin: auto;
+    margin-bottom: 2em;
 }
 
 #generate:hover {
@@ -52,4 +54,18 @@ body {
 
 #generate:focus {
     border: black;
+}
+
+#entryHolder {
+    display: flex;
+    flex-direction: column;
+    background-color: pink;
+    padding: 2em;
+    width: 50%;
+    height: 50vh;
+    margin: auto;
+}
+
+#temp {
+    font-size: 3em;
 }
