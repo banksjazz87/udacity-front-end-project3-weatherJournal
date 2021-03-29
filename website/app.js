@@ -71,6 +71,7 @@ function newLocation(e) {
             postData("/newZip", { date: day, temp: data.main.temp, city: data.name, weather: data.weather[0].description, content: userText });
         })
         .then(takeAll)
+        .then(contentBackground('entryHolder'))
         .then(clearPrevious())
 }
 
@@ -182,4 +183,20 @@ const upperCase = (string) => {
     }
 
     return (newStr.join(' '));
+}
+
+//initializing the display of the entryHolder to 'none'.
+document.getElementById('entryHolder').style.display = 'none';
+
+/**
+ * 
+ * @param {*} displayId 
+ * @description this will be added to the click event on the button with the id generate, and will turn the display from none to flex.
+ * @returns a new display value of flex will be returned after supplying the elements id as a parameter. 
+ */
+const contentBackground = (displayId) => {
+    displayId = document.getElementById(displayId);
+    if (displayId.style.display === 'none') {
+        displayId.style.display = 'flex';
+    }
 }

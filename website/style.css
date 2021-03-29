@@ -36,7 +36,6 @@ body {
 
 #generate {
     width: 7em;
-    /*border-width: .15em;*/
     padding: .15em;
     border-style: solid;
     border-color: black;
@@ -44,7 +43,6 @@ body {
     box-shadow: 1px 2px gray;
     outline: none;
     margin: auto;
-    /*margin-bottom: 2em;*/
 }
 
 #generate:hover {
@@ -66,7 +64,6 @@ body {
     background-color: pink;
     padding: 1em;
     width: 30vw;
-    /*height: 50vh;*/
     margin: auto;
     justify-content: flex-start;
     font-size: 18px;
