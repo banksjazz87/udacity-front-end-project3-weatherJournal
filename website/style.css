@@ -18,6 +18,9 @@ body {
     align-items: left;
     margin: auto;
     line-height: 2em;
+    background-color: gray;
+    padding: 2em;
+    margin-bottom: 2em;
 }
 
 #zip {
@@ -41,7 +44,7 @@ body {
     box-shadow: 1px 2px gray;
     outline: none;
     margin: auto;
-    margin-bottom: 2em;
+    /*margin-bottom: 2em;*/
 }
 
 #generate:hover {
@@ -58,14 +61,43 @@ body {
 
 #entryHolder {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     background-color: pink;
-    padding: 2em;
-    width: 50%;
-    height: 50vh;
+    padding: 1em;
+    width: 30vw;
+    /*height: 50vh;*/
     margin: auto;
+    justify-content: flex-start;
+    font-size: 18px;
+}
+
+#date {
+    font-size: 1.25em;
+    margin-top: .5em;
+}
+
+#city {
+    font-size: 1.25em;
+}
+
+#weather_text {
+    font-size: 1.75em;
+    margin-top: 5vh;
 }
 
 #temp {
     font-size: 3em;
+    margin-top: 6vh;
+    margin-bottom: 2vh;
+}
+
+#weather {
+    font-size: 1.5em;
+}
+
+#content {
+    margin-top: 1em;
+    flex-wrap: wrap;
+    text-align: left;
 }

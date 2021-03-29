@@ -54,7 +54,7 @@ function newZip(req, res) {
         content: req.body.content
     }
 
-    allData.unshift(projectData);
+    allData.push(projectData);
     res.send(projectData)
     console.log(allData);
 }

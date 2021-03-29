@@ -9,7 +9,7 @@ const entryAtt = document.createAttribute('id');
 entryAtt.value = 'entryHolder';
 entry.setAttributeNode(entryAtt);
 
-const childDivs = ["date", "city", "temp_text", "temp", "weather", "content"];
+const childDivs = ["date", "city", "weather_text", "temp", "weather", "content"];
 
 for (let i = 0; i < childDivs.length; i++) {
     let newDiv = document.createElement('div');
@@ -136,17 +136,17 @@ const takeAll = async() => {
     try {
         const newData = await allUserData.json();
 
-        document.getElementById('date').innerText = newData[0].date;
+        document.getElementById('date').innerText = newData[newData.length - 1].date;
 
-        document.getElementById('city').innerText = newData[0].city;
+        document.getElementById('city').innerText = newData[newData.length - 1].city;
 
-        document.getElementById('temp_text').innerText = "Current Temperature";
+        document.getElementById('weather_text').innerText = "Current Weather";
 
-        document.getElementById('temp').innerText = newData[0].temp + "°F";
+        document.getElementById('temp').innerText = newData[newData.length - 1].temp + "°F";
 
-        document.getElementById('weather').innerText = upperCase(newData[0].weather);
+        document.getElementById('weather').innerText = upperCase(newData[newData.length - 1].weather);
 
-        document.getElementById('content').innerText = newData[0].content;
+        document.getElementById('content').innerText = newData[newData.length - 1].content;
 
     } catch (error) {
         console.log("error", error);
