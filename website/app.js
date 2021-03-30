@@ -71,7 +71,6 @@ function newLocation(e) {
             postData("/newZip", { date: day, temp: data.main.temp, city: data.name, weather: data.weather[0].description, content: userText });
         })
         .then(takeAll)
-        .then(contentBackground('entryHolder'))
         .then(clearPrevious())
 }
 
@@ -93,6 +92,7 @@ const getWeather = async(baseURL, loc, nation, key, farenheit) => {
         if (data.cod !== 200) {
             alert("Please insert a valid zip code.")
         } else {
+            contentBackground('entryHolder');
             return data;
         }
     } catch (error) {

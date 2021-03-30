@@ -5,6 +5,7 @@ body {
     height: 100vh;
     text-align: center;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #main_title {
@@ -29,37 +30,36 @@ body {
 
 #zip {
     margin-bottom: .5em;
-    font-size: 1em;
+    font-size: .95em;
+    outline-color: #4cb944;
+    font-family: monospace, times, serif;
 }
 
 #feelings {
-    font-size: 1em;
+    font-size: .95em;
     margin-bottom: 1em;
-    outline-color: gray;
+    outline-color: #4cb944;
     height: 10vh;
+    font-family: monospace, times, serif;
 }
 
 #generate {
     width: 7em;
     padding: .15em;
-    border-style: solid;
-    border-color: black;
+    background-color: white;
     border-radius: 5%;
-    box-shadow: 1px 2px gray;
+    box-shadow: 1px 3px black;
     outline: none;
     margin: auto;
+    outline-color: #4cb944;
 }
 
 #generate:hover {
-    background-color: pink;
+    background-color: rgb(165, 162, 162);
 }
 
 #generate:active {
     background-color: pink;
-}
-
-#generate:focus {
-    border: black;
 }
 
 #entryHolder {
@@ -72,6 +72,9 @@ body {
     margin: auto;
     justify-content: flex-start;
     font-size: 18px;
+    box-shadow: 3px 6px black;
+    text-shadow: 1px 1.5px black;
+    border-radius: 2%;
 }
 
 #date {
@@ -85,13 +88,13 @@ body {
 
 #weather_text {
     font-size: 1.75em;
-    margin-top: 5vh;
+    margin-top: 8vh;
 }
 
 #temp {
     font-size: 3em;
-    margin-top: 4vh;
-    margin-bottom: 4vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 #weather {
@@ -102,4 +105,41 @@ body {
     margin-top: 1em;
     flex-wrap: wrap;
     text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+    #interaction_container {
+        margin-top: 45vh;
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+        align-items: left;
+        margin: auto;
+        background-color: #246eb9;
+        padding: 2em;
+        margin-bottom: 2em;
+        color: black;
+        box-shadow: 3px 6px black;
+        border-radius: 2%;
+    }
+    #entryHolder {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        background-color: #f06543;
+        padding: 1em;
+        width: 70vw;
+        font-size: 14px;
+        margin: auto;
+        justify-content: flex-start;
+        box-shadow: 3px 6px black;
+        text-shadow: 1px 1.5px black;
+        border-radius: 2%;
+    }
+    #generate:hover {
+        background-color: white;
+    }
 }
