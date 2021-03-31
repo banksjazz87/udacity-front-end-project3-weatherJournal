@@ -20,7 +20,7 @@ This is a weather journal that I have created for the Udacity front-end develope
 
 * Cors can be installed in the terminal by typing
     $ npm install cors
-* Side note: this project required the use of the 'body parser' package, but I was unable to use this due to the fact that express now has it's own built in way to parse the body.
+* Side note: this project required the use of the 'body parser' package, but I was unable to use this due to the fact that express now has its own built in way to parse the data from the body.
 
 ## References
 * openweathermap.com

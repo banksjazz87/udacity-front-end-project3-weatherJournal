@@ -195,7 +195,9 @@ document.getElementById('entryHolder').style.display = 'none';
  * @returns a new display value of flex will be returned after supplying the elements id as a parameter. 
  */
 const contentBackground = (displayId) => {
+
     displayId = document.getElementById(displayId);
+
     if (displayId.style.display === 'none') {
         displayId.style.display = 'flex';
     }
